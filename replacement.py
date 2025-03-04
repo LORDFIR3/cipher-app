@@ -29,7 +29,7 @@ def replacement_cipher(string:str, key:str) -> str:
         print(f"num_key: {num_key}")
         print(f"matrix: {matrix}")
         print(f"min(num_key): {min(num_key) if num_key else 'EMPTY'}")
-        
+
         encrypted += "".join(matrix[num_key.index(min(num_key))])
         matrix.pop(num_key.index(min(num_key)))
         num_key.pop(num_key.index(min(num_key)))
