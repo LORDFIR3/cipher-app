@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cipher Web App</title>
+    <script>
+        async function encryptCaesar() {
+            const text = document.getElementById("text").value;
+            const shift = document.getElementById("shift").value;
+            const response = await fetch("/caesar/encrypt", {
+                method: "POST",
+                body: new FormData(document.getElementById("cipherForm"))
+            });
+            const result = await response.json();
+            document.getElementById("output").innerText = "Encrypted: " + result.result;
+        }
+
+        async function decryptCaesar() {
+            const response = await fetch("/caesar/decrypt", {
+                method: "POST",
+                body: new FormData(document.getElementById("cipherForm"))
+            });
+            const result = await response.json();
+            document.getElementById("output").innerText = "Decrypted: " + result.result;
+        }
+
+        async function encryptReplacement() {
+            const response = await fetch("/replacement/encrypt", {
+                method: "POST",
+                body: new FormData(document.getElementById("replacementForm"))
+            });
+            const result = await response.json();
+            document.getElementById("output").innerText = "Encrypted: " + result.result;
+        }
+
+        async function decryptReplacement() {
+            const response = await fetch("/replacement/decrypt", {
+                method: "POST",
+                body: new FormData(document.getElementById("replacementForm"))
+            });
+            const result = await response.json();
+            document.getElementById("output").innerText = "Decrypted: " + result.result;
+        }
+    </script>
+</head>
+<body>
+    <h1>Cipher Web App</h1>
+
+    <h2>Caesar Cipher</h2>
+    <form id="cipherForm">
+        <label for="text">Text:</label>
+        <input type="text" id="text" name="text" required>
+        <label for="shift">Shift:</label>
+        <input type="number" id="shift" name="shift" value="3">
+        <button type="button" onclick="encryptCaesar()">Encrypt</button>
+        <button type="button" onclick="decryptCaesar()">Decrypt</button>
+    </form>
+
+    <h2>Replacement Cipher</h2>
+    <form id="replacementForm">
+        <label for="repText">Text:</label>
+        <input type="text" id="repText" name="text" required>
+        <label for="key">Key:</label>
+        <input type="text" id="key" name="key" required>
+        <button type="button" onclick="encryptReplacement()">Encrypt</button>
+        <button type="button" onclick="decryptReplacement()">Decrypt</button>
+    </form>
+
+    <h3 id="output"></h3>
+</body>
+</html>
