@@ -25,11 +25,7 @@ def replacement_cipher(string:str, key:str) -> str:
     encrypted = ''
     matrix = transpose_matrix(string_to_matrix(string, len(key)))
     num_key = define_order(key)
-    while num_key:
-        print(f"num_key: {num_key}")
-        print(f"matrix: {matrix}")
-        print(f"min(num_key): {min(num_key) if num_key else 'EMPTY'}")
-        
+    while num_key:        
         encrypted += "".join(matrix[num_key.index(min(num_key))])
         matrix.pop(num_key.index(min(num_key)))
         num_key.pop(num_key.index(min(num_key)))
