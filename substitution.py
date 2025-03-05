@@ -55,6 +55,6 @@ def replacement_decipher(encrypted: str, key: str) -> str:
             index += 1
 
     # Flatten back into a string
-    return ''.join(char for row in matrix for char in row)
+    return ''.join(char for row in matrix for char in row).lower().capitalize()
 
 

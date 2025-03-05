@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify, render_template
 import caesar
-import replacement
+import substitution
 
 app = Flask(__name__)
 
@@ -26,14 +26,14 @@ def caesar_decrypt():
 def replacement_encrypt():
     text = request.form.get("text", "")
     key = request.form.get("key", "")
-    encrypted = replacement.replacement_cipher(text, key)
+    encrypted = substitution.replacement_cipher(text, key)
     return jsonify({"result": encrypted})
 
 @app.route("/replacement/decrypt", methods=["POST"])
 def replacement_decrypt():
     text = request.form.get("text", "")
     key = request.form.get("key", "")
-    decrypted = replacement.replacement_decipher(text, key)
+    decrypted = substitution.replacement_decipher(text, key)
     return jsonify({"result": decrypted})
 
 if __name__ == "__main__":
