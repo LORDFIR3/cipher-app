@@ -16,20 +16,22 @@ def string_to_matrix(text:str, columns:int):
     return [list(text[i:i + columns]) for i in range(0, len(text), columns)]
 
 
-def transpose_matrix(matrix):
+def transpose_matrix(matrix, fill_value=''):
     """Reverses rows and columns (transposes) in a list-of-lists matrix."""
-    return [list(row) for row in zip(*matrix)]
+    max_length = max(len(row) for row in matrix)
+    padded_matrix = [row + [fill_value] * (max_length - len(row)) for row in matrix]
+    return [list(row) for row in zip(*padded_matrix)]
 
 
 def replacement_cipher(string:str, key:str) -> str:
     encrypted = ''
     matrix = transpose_matrix(string_to_matrix(string, len(key)))
     num_key = define_order(key)
-    while num_key:        
+    while num_key:
         encrypted += "".join(matrix[num_key.index(min(num_key))])
         matrix.pop(num_key.index(min(num_key)))
         num_key.pop(num_key.index(min(num_key)))
-    return encrypted
+    return encrypted.lower().capitalize()
 
 
 def replacement_decipher(encrypted: str, key: str) -> str:
@@ -53,6 +55,6 @@ def replacement_decipher(encrypted: str, key: str) -> str:
             index += 1
 
     # Flatten back into a string
-    return ''.join(char for row in matrix for char in row)
+    return ''.join(char for row in matrix for char in row).lower().capitalize()
 
 
