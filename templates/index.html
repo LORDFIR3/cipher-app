@@ -15,6 +15,7 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
+            flex-direction: column;
         }
         .container {
             background: #1e1e1e;
@@ -33,7 +34,7 @@
             font-size: 24px;
             font-weight: 600;
             margin: 10px 0;
-            text-align: center; /* Center the cipher names */
+            text-align: center;
         }
         input, button {
             padding: 10px;
@@ -43,7 +44,7 @@
             font-size: 16px;
         }
         input {
-            width: 80%;
+            width: 100%;
             background: #2a2a2a;
             color: #fff;
         }
@@ -52,14 +53,16 @@
             color: white;
             cursor: pointer;
             transition: 0.3s;
+            width: 100%;
         }
         button:hover {
             background: #e68900;
         }
         .forms-container {
             display: flex;
-            justify-content: space-around;
+            justify-content: space-between;
             margin-top: 20px;
+            width: 100%;
         }
         form {
             background: #2a2a2a;
@@ -72,11 +75,22 @@
             margin-top: 20px;
             font-size: 18px;
             font-weight: normal;
+            text-align: left;
         }
         .cipher-used {
             font-style: italic;
             font-size: 16px;
             margin-top: 10px;
+        }
+        .clear-button {
+            background: #d32f2f;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+        .clear-button:hover {
+            background: #c1272d;
         }
     </style>
     <script>
@@ -88,7 +102,7 @@
                 body: new FormData(document.getElementById("cipherForm"))
             });
             const result = await response.json();
-            document.getElementById("output").innerText = "Encrypted: " + result.result;
+            document.getElementById("output").innerText = result.result;
             document.getElementById("cipherUsed").innerText = "Using Caesar Cipher";
         }
 
@@ -98,7 +112,7 @@
                 body: new FormData(document.getElementById("cipherForm"))
             });
             const result = await response.json();
-            document.getElementById("output").innerText = "Decrypted: " + result.result;
+            document.getElementById("output").innerText = result.result;
             document.getElementById("cipherUsed").innerText = "Using Caesar Cipher";
         }
 
@@ -108,7 +122,7 @@
                 body: new FormData(document.getElementById("replacementForm"))
             });
             const result = await response.json();
-            document.getElementById("output").innerText = "Encrypted: " + result.result;
+            document.getElementById("output").innerText = result.result;
             document.getElementById("cipherUsed").innerText = "Using Replacement Cipher";
         }
 
@@ -118,8 +132,14 @@
                 body: new FormData(document.getElementById("replacementForm"))
             });
             const result = await response.json();
-            document.getElementById("output").innerText = "Decrypted: " + result.result;
+            document.getElementById("output").innerText = result.result;
             document.getElementById("cipherUsed").innerText = "Using Replacement Cipher";
+        }
+
+        // Clear output field
+        function clearOutput() {
+            document.getElementById("output").innerText = "";
+            document.getElementById("cipherUsed").innerText = "";
         }
     </script>
 </head>
@@ -162,8 +182,12 @@
         <!-- Cipher Used Info -->
         <div class="output-container">
             <p id="cipherUsed" class="cipher-used"></p>
+            <p><strong>Result:</strong></p>
             <h3 id="output"></h3>
         </div>
+
+        <!-- Clear Button -->
+        <button class="clear-button" onclick="clearOutput()">Clear Output</button>
     </div>
 </body>
 </html>
