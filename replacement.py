@@ -13,12 +13,17 @@ def define_order(key:str) -> list:
 
 def string_to_matrix(text:str, columns:int):
     """Converts text into a matrix (list of lists) with a fixed number of columns."""
+    print("Initial Matrix (Before Transposition):")
+    for row in [list(text[i:i + columns]) for i in range(0, len(text), columns)]:
+        print(row)
     return [list(text[i:i + columns]) for i in range(0, len(text), columns)]
 
 
-def transpose_matrix(matrix):
+def transpose_matrix(matrix, fill_value=None):
     """Reverses rows and columns (transposes) in a list-of-lists matrix."""
-    return [list(row) for row in zip(*matrix)]
+    max_length = max(len(row) for row in matrix)
+    padded_matrix = [row + [fill_value] * (max_length - len(row)) for row in matrix]
+    return [list(row) for row in zip(*padded_matrix)]
 
 
 def replacement_cipher(string:str, key:str) -> str:
