@@ -4,6 +4,76 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cipher Web App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        h1 {
+            font-size: 2.5em;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        h2 {
+            font-size: 1.8em;
+            color: #4CAF50;
+            margin-top: 20px;
+        }
+        h3 {
+            font-size: 1.2em;
+            color: #333;
+            margin-top: 20px;
+            font-weight: normal;
+        }
+        form {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            margin-top: 20px;
+        }
+        label {
+            font-size: 1em;
+            margin-bottom: 5px;
+            display: block;
+            color: #555;
+        }
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1em;
+        }
+        button {
+            width: 48%;
+            padding: 10px;
+            font-size: 1em;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-right: 4%;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        button:last-child {
+            margin-right: 0;
+        }
+    </style>
     <script>
         async function encryptCaesar() {
             const text = document.getElementById("text").value;
@@ -53,8 +123,10 @@
         <input type="text" id="text" name="text" required>
         <label for="shift">Shift:</label>
         <input type="number" id="shift" name="shift" value="3">
-        <button type="button" onclick="encryptCaesar()">Encrypt</button>
-        <button type="button" onclick="decryptCaesar()">Decrypt</button>
+        <div>
+            <button type="button" onclick="encryptCaesar()">Encrypt</button>
+            <button type="button" onclick="decryptCaesar()">Decrypt</button>
+        </div>
     </form>
 
     <h2>Replacement Cipher</h2>
@@ -63,8 +135,10 @@
         <input type="text" id="repText" name="text" required>
         <label for="key">Key:</label>
         <input type="text" id="key" name="key" required>
-        <button type="button" onclick="encryptReplacement()">Encrypt</button>
-        <button type="button" onclick="decryptReplacement()">Decrypt</button>
+        <div>
+            <button type="button" onclick="encryptReplacement()">Encrypt</button>
+            <button type="button" onclick="decryptReplacement()">Decrypt</button>
+        </div>
     </form>
 
     <h3 id="output"></h3>
