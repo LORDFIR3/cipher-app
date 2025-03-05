@@ -13,13 +13,10 @@ def define_order(key:str) -> list:
 
 def string_to_matrix(text:str, columns:int):
     """Converts text into a matrix (list of lists) with a fixed number of columns."""
-    print("Initial Matrix (Before Transposition):")
-    for row in [list(text[i:i + columns]) for i in range(0, len(text), columns)]:
-        print(row)
     return [list(text[i:i + columns]) for i in range(0, len(text), columns)]
 
 
-def transpose_matrix(matrix, fill_value=None):
+def transpose_matrix(matrix, fill_value=''):
     """Reverses rows and columns (transposes) in a list-of-lists matrix."""
     max_length = max(len(row) for row in matrix)
     padded_matrix = [row + [fill_value] * (max_length - len(row)) for row in matrix]
@@ -31,14 +28,10 @@ def replacement_cipher(string:str, key:str) -> str:
     matrix = transpose_matrix(string_to_matrix(string, len(key)))
     num_key = define_order(key)
     while num_key:
-        print(f"num_key: {num_key}")
-        print(f"matrix: {matrix}")
-        print(f"min(num_key): {min(num_key) if num_key else 'EMPTY'}")
-
         encrypted += "".join(matrix[num_key.index(min(num_key))])
         matrix.pop(num_key.index(min(num_key)))
         num_key.pop(num_key.index(min(num_key)))
-    return encrypted
+    return encrypted.lower().capitalize()
 
 
 def replacement_decipher(encrypted: str, key: str) -> str:
